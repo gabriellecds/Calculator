@@ -5,6 +5,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
     
+    @IBOutlet var numbers: [UIButton]!
+    @IBOutlet var properties: [UIButton]!
+    @IBOutlet var calculators: [UIButton]!
+    
     private var isFinishedTypingNumber: Bool = true
     
     private var displayValue: Double {
@@ -58,6 +62,55 @@ class ViewController: UIViewController {
         }
         
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    
+        for button in numbers {
+            button.styleNumbersButtons()
+        }
+        
+        for button in properties {
+            button.stylePropertiesButtons()
+        }
+ 
+        for button in calculators {
+            button.styleCalculatorsButtons()
+        }
+    }
 }
 
+//MARK: - Buttons Appearance
+
+extension UIButton {
+    
+    func styleNumbersButtons() {
+        let sideLength = min(self.frame.size.width, self.frame.size.height)
+        self.frame.size = CGSize(width: sideLength, height: sideLength)
+        
+        self.backgroundColor = UIColor.darkGray
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.layer.cornerRadius = sideLength / 2
+        self.layer.masksToBounds = true
+    }
+  
+    func stylePropertiesButtons() {
+        let sideLength = min(self.frame.size.width, self.frame.size.height)
+        self.frame.size = CGSize(width: sideLength, height: sideLength)
+        
+        self.backgroundColor = UIColor.lightGray
+        self.setTitleColor(UIColor.black, for: .normal)
+        self.layer.cornerRadius = sideLength / 2
+        self.layer.masksToBounds = true
+    }
+    
+    func styleCalculatorsButtons() {
+        let sideLength = min(self.frame.size.width, self.frame.size.height)
+        self.frame.size = CGSize(width: sideLength, height: sideLength)
+        
+        self.backgroundColor = UIColor.orange
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.layer.cornerRadius = sideLength / 2
+        self.layer.masksToBounds = true
+    }
+}
